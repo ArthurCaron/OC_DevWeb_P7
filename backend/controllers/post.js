@@ -81,7 +81,7 @@ exports.updatePost = (req, res) => {
 
     Post.findOne({ _id: req.params.id })
         .then(post => {
-            if (post.userId != req.auth.userId) {
+            if (req.auth.role !== "admin" && post.userId != req.auth.userId) {
                 res.status(403).json({ message: "Not authorized to modify post created by another user" });
             } else {
                 const savePost = () => {
@@ -110,7 +110,7 @@ exports.updatePost = (req, res) => {
 exports.deletePost = (req, res) => {
     Post.findOne({ _id: req.params.id })
         .then(post => {
-            if (post.userId != req.auth.userId) {
+            if (req.auth.role !== "admin" && post.userId != req.auth.userId) {
                 res.status(403).json({ message: "Not authorized to delete post created by another user" });
             } else {
                 deleteImage(post.imageUrl, () => {
