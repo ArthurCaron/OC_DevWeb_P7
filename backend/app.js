@@ -1,9 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const path = require("path");
 const rateLimit = require('express-rate-limit');
 require('dotenv').config()
 
 const userRoutes = require("./routes/user");
+const postRoutes = require("./routes/post");
 
 mongoose.connect(
     `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster0.ztmlhtm.mongodb.net/?retryWrites=true&w=majority`,
@@ -33,5 +35,7 @@ const apiLimiter = rateLimit({
 })
 
 app.use("/api/auth", apiLimiter, userRoutes);
+app.use("/api/posts", apiLimiter, postRoutes);
+app.use("/images", express.static(path.join(__dirname, "images")));
 
 module.exports = app;
