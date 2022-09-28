@@ -85,8 +85,7 @@ exports.updatePost = (req, res) => {
                 res.status(403).json({ message: "Not authorized to modify post created by another user" });
             } else {
                 const savePost = () => {
-                    Post
-                        .updateOne(
+                    Post.updateOne(
                             { _id: req.params.id },
                             {
                                 text: req.body.text,
@@ -97,7 +96,7 @@ exports.updatePost = (req, res) => {
                         .catch(error => res.status(400).json({ error }));
                 }
 
-                if (req.imageUrl !== undefined) {
+                if (req.imageUrl !== undefined && post.imageUrl !== undefined) {
                     deleteImage(post.imageUrl, savePost);
                 } else {
                     savePost();
@@ -113,11 +112,17 @@ exports.deletePost = (req, res) => {
             if (req.auth.role !== "admin" && post.userId != req.auth.userId) {
                 res.status(403).json({ message: "Not authorized to delete post created by another user" });
             } else {
-                deleteImage(post.imageUrl, () => {
+                const deletePost = () => {
                     Post.deleteOne({ _id: req.params.id })
                         .then(() => res.status(200).json({ message: "Post deleted" }))
                         .catch(error => res.status(400).json({ error }));
-                });
+                }
+
+                if (post.imageUrl !== undefined) {
+                    deleteImage(post.imageUrl, deletePost);
+                } else {
+                    deletePost();
+                }
             }
         })
         .catch(error => res.status(400).json({ error }));
