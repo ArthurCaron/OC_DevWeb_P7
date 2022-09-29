@@ -31,13 +31,16 @@ export default {
 
 <template>
     <header>
-        <nav v-if="isLoggedIn">
+        <nav id="loggedIn" v-if="isLoggedIn">
+            <div id="filler"></div>
             <RouterLink :to="{ name: 'Home' }">
                 <IconLogoMonoBlackVue />
             </RouterLink>
-            <div id="logout" @click="logout">Log Out</div>
+            <div id="logoutDiv">
+                <div id="logout" @click="logout">Log Out</div>
+            </div>
         </nav>
-        <nav v-else>
+        <nav id="notLoggedIn" v-else>
             <IconLogoMonoBlackVue />
             <div>
                 <RouterLink :class="{ selected: isLoginPage }" :to="{ name: 'Login' }">
@@ -52,7 +55,11 @@ export default {
 </template>
 
 <style scoped>
-nav {
+header {
+    width: 100%;
+}
+
+#notLoggedIn {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -61,18 +68,44 @@ nav {
     width: 100%;
 }
 
-nav > div {
+#notLoggedIn > div {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     width: 100%;
 }
 
-nav > div > a {
-    border-top: 1px solid black;
-    border-right: 1px solid black;
-    border-left: 1px solid black;
+#notLoggedIn > div > a {
+    border-top: 1px solid #4E5166;
+    border-right: 1px solid #4E5166;
+    border-left: 1px solid #4E5166;
     padding: 10px;
+    margin-right: 30px;
+    margin-left: 30px;
+}
+
+#loggedIn {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 100%;
+}
+
+#filler {
+    width: 15%;
+}
+
+#loggedIn > a {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+#logoutDiv {
+    display: flex;
+    justify-content: flex-end;
+    width: 15%;
 }
 
 .selected {
@@ -91,8 +124,13 @@ a {
     justify-content: center;
     width: 80px;
     cursor: pointer;
-    border: 1px solid black;
-    background-color:  #FFD7D7;
+    border: 1px solid #4E5166;
+    background-color: #4E5166;
+    color: white;
+    border-radius: 12px;
+    font-size: 18px;
+    padding: 8px;
+    margin-bottom: 5px;
 }
 </style>
     

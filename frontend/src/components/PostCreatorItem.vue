@@ -48,18 +48,23 @@ export default {
             this.image = null;
             this.$refs.image.reset();
         }
+    },
+    computed: {
+        isTextEmpty() {
+            return this.text === "";
+        }
     }
 }
 </script>
     
 <template>
     <div class="creator">
-        <span>Add an image:</span>
+        <span class="imageText">Add an image:</span>
         <form ref="image">
             <input type="file" accept="image/png, image/jpeg, image/jpg" @change="imageSelected" />
         </form>
-        <textarea v-model="text" rows="10"></textarea>
-        <span @click="createPost">Post</span>
+        <textarea v-model="text" rows="10" ></textarea>
+        <span class="button" @click="createPost" :class="{ disabled: isTextEmpty }">Post</span>
     </div>
 </template>
 
@@ -69,14 +74,44 @@ export default {
     flex-direction: column;
     width: 100%;
     margin-bottom: 10px;
+    border: 1px solid #4E5166;
+    padding: 15px;
+    box-sizing: border-box;
+    background-color: #FFD7D7;
+    border-radius: 12px;
+    box-shadow: #4E5166 1px 1px 2px;
+}
+
+.imageText {
+    margin-bottom: 5px
+}
+
+form {
+    margin-bottom: 15px
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    border: 1px solid black;
+    background-color: #4E5166;
+    color: white;
+    padding: 5px;
+    width: 60px;
+    font-size: 18px;
+    border-radius: 12px;
+    margin-top: 15px;
+}
+
+.disabled {
+    background-color: black;
+    color: #4E5166;
+    pointer-events: none;
 }
 
 textarea {
     resize: none;
-}
-
-span {
-    cursor: pointer;
 }
 </style>
     

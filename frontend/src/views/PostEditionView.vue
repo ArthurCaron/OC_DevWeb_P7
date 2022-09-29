@@ -78,13 +78,15 @@ export default {
 <template>
     <div class="post">
         <img :src="post.imageUrl" v-if="post.imageUrl !== undefined" />
-        <span v-if="post.imageUrl !== undefined">Update the image:</span>
-        <span v-else>Add an image:</span>
-        <input type="file" accept="image/png, image/jpeg, image/jpg" @change="imageSelected" />
+        <span class="imageText" v-if="post.imageUrl !== undefined">Update the image:</span>
+        <span class="imageText" v-else>Add an image:</span>
+        <form>
+            <input type="file" accept="image/png, image/jpeg, image/jpg" @change="imageSelected" />
+        </form>
         <textarea v-model="post.text" rows="10"></textarea>
         <div class="actions">
-            <span @click="savePost">Save</span>
-            <span @click="deletePost">Delete</span>
+            <span class="button" @click="savePost">Save</span>
+            <span class="button" @click="deletePost">Delete</span>
         </div>
     </div>
 </template>
@@ -94,6 +96,19 @@ export default {
     display: flex;
     flex-direction: column;
     width: 100%;
+    margin-bottom: 10px;
+    border: 1px solid #4E5166;
+    padding: 15px;
+    box-sizing: border-box;
+    background-color: #FFD7D7;
+}
+
+.imageText {
+    margin-bottom: 5px
+}
+
+form {
+    margin-bottom: 15px
 }
 
 textarea {
@@ -108,5 +123,21 @@ textarea {
 
 .actions span {
     cursor: pointer;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    border: 1px solid black;
+    background-color: white;
+    padding: 2px;
+    width: 60px;
+    border-radius: 12px;
+    margin-top: 15px;
+}
+
+.button:hover {
+    color: #FD2D01;
 }
 </style>

@@ -47,9 +47,11 @@ export default {
 
 <style scoped>
 .wrapper {
-    border: 1px solid black;
+    border: 1px solid #4E5166;
     background-color: #FFD7D7;
     width: 100%;
+    border-radius: 12px;
+    box-shadow: #4E5166 1px 1px 2px;
 }
 
 .subWrapper {
@@ -75,9 +77,15 @@ export default {
     justify-content: center;
     cursor: pointer;
     border: 1px solid black;
-    background-color: #FD2D01;
+    background-color: #4E5166;
+    font-size: 18px;
     color: white;
     width: 60px;
     padding: 8px;
+    border-radius: 12px;
+}
+
+#signup:hover {
+    background-color: #FD2D01;
 }
 </style>
