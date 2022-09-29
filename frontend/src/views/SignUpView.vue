@@ -18,7 +18,7 @@ export default {
             const jwt = await res.json();
             sessionStorage.setItem("userId", JSON.stringify(jwt.userId));
             sessionStorage.setItem("token", JSON.stringify(jwt.token));
-            
+
             await login(this.$refs.email.value, this.$refs.password.value);
             this.$emit("loggedIn");
             this.$router.push({ name: 'Home' });

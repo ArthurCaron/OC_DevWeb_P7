@@ -34,7 +34,7 @@ export default {
         <PostCreatorItem @postCreated="fetchAll"/>
         <ul>
             <li v-for="post in posts">
-                <PostItem :key="post._id" :postId="post._id" />
+                <PostItem :key="post._id" :postId="post._id"/>
             </li>
         </ul>
     </main>

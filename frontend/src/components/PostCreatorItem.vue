@@ -10,7 +10,7 @@ export default {
     },
     methods: {
         redirectToHome() {
-            this.$router.push({ name: 'Home' })
+            this.$router.push({ name: 'Home' });
         },
         async createPost() {
             if (this.image === null) {
@@ -22,7 +22,7 @@ export default {
                         "Authorization": `Bearer ${getToken()}`
                     },
                     body: JSON.stringify({ "text": this.text })
-                })
+                });
             } else {
                 const formData = new FormData();
                 formData.append("post", JSON.stringify({ "text": this.text }));
@@ -34,7 +34,7 @@ export default {
                         "Authorization": `Bearer ${getToken()}`
                     },
                     body: formData
-                })
+                });
             }
             this.clear();
             this.$emit("postCreated");

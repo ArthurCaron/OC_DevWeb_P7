@@ -23,11 +23,11 @@ export default {
                 headers: {
                     "Authorization": `Bearer ${getToken()}`
                 }
-            })
-            this.post = await res.json()
+            });
+            this.post = await res.json();
         },
         redirectToHome() {
-            this.$router.push({ name: 'Home' })
+            this.$router.push({ name: 'Home' });
         },
         async savePost() {
             if (this.image === null) {
@@ -39,7 +39,7 @@ export default {
                         "Authorization": `Bearer ${getToken()}`
                     },
                     body: JSON.stringify({ "text": this.post.text })
-                })
+                });
             } else {
                 const formData = new FormData();
                 formData.append("post", JSON.stringify({ "text": this.post.text }));
@@ -51,9 +51,9 @@ export default {
                         "Authorization": `Bearer ${getToken()}`
                     },
                     body: formData
-                })
+                });
             }
-            this.redirectToHome()
+            this.redirectToHome();
         },
         async deletePost() {
             await fetch(`http://localhost:3000/api/posts/${this.$route.params.id}`, {
@@ -61,8 +61,8 @@ export default {
                 headers: {
                     "Authorization": `Bearer ${getToken()}`
                 }
-            })
-            this.redirectToHome()
+            });
+            this.redirectToHome();
         },
         imageSelected(e) {
             const file = e.target.files[0];
@@ -70,7 +70,7 @@ export default {
         }
     },
     created() {
-        this.fetchData()
+        this.fetchData();
     }
 }
 </script>

@@ -1,6 +1,6 @@
 <script>
 import { RouterLink } from "vue-router";
-import { getToken } from "../utils/auth";
+import { getToken, getUserId } from "../utils/auth";
 
 export default {
     components: {
@@ -32,7 +32,7 @@ export default {
                 }
             });
             this.post = await res.json();
-            this.userCreated = this.post.userId === "1"; // need to check against current user id
+            this.userCreated = this.post.userId === getUserId();
         },
         async likePost(like) {
             await fetch(`http://localhost:3000/api/posts/${this.postId}/like`, {
@@ -43,7 +43,7 @@ export default {
                     "Authorization": `Bearer ${getToken()}`
                 },
                 body: JSON.stringify({ "like": like })
-            })
+            });
             this.fetchData();
         },
         like() {

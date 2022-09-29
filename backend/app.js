@@ -1,8 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
-const rateLimit = require('express-rate-limit');
-require('dotenv').config()
+const rateLimit = require("express-rate-limit");
+require("dotenv").config();
 
 const userRoutes = require("./routes/user");
 const postRoutes = require("./routes/post");
@@ -12,7 +12,8 @@ mongoose.connect(
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
-    })
+    }
+    )
     .then(() => console.log("Connexion to MongoDB Atlas => success"))
     .catch(() => console.log("Connexion to MongoDB Atlas => failure"));
 

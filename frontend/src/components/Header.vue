@@ -1,6 +1,7 @@
 <script>
 import { RouterLink } from "vue-router";
 import IconLogoMonoBlackVue from "./icons/IconLogoMonoBlack.vue";
+import { logout } from "../utils/auth";
 
 export default {
     components: {
@@ -12,10 +13,9 @@ export default {
     },
     methods: {
         logout() {
-            sessionStorage.removeItem("userId");
-            sessionStorage.removeItem("token");
+            logout();
             this.$emit("loggedOut");
-            this.$router.push({ name: 'Login' })
+            this.$router.push({ name: 'Login' });
         }
     }
 }

@@ -1,5 +1,5 @@
 const fs = require("fs");
-const { validationResult } = require('express-validator');
+const { validationResult } = require("express-validator");
 const Post = require("../models/Post");
 
 function deleteImage(imageUrl, callback) {
@@ -44,13 +44,13 @@ exports.getPosts = (req, res) => {
         .sort({ _id: -1 })
         .then(posts => res.status(200).json(posts))
         .catch(error => res.status(400).json({ error }));
-};
+}
 
 exports.getPost = (req, res) => {
     Post.findOne({ _id: req.params.id })
         .then(post => res.status(200).json(post))
         .catch(error => res.status(400).json({ error }));
-};
+}
 
 exports.addPost = (req, res) => {
     const errors = validationResult(req);
@@ -71,7 +71,7 @@ exports.addPost = (req, res) => {
     post.save()
         .then(() => res.status(201).json({ message: "Post created" }))
         .catch(error => res.status(400).json({ error }));
-};
+}
 
 exports.updatePost = (req, res) => {
     const errors = validationResult(req);
@@ -104,7 +104,7 @@ exports.updatePost = (req, res) => {
             }
         })
         .catch(error => res.status(400).json({ error }));
-};
+}
 
 exports.deletePost = (req, res) => {
     Post.findOne({ _id: req.params.id })
@@ -126,7 +126,7 @@ exports.deletePost = (req, res) => {
             }
         })
         .catch(error => res.status(400).json({ error }));
-};
+}
 
 exports.updateLikePost = (req, res) => {
     Post.findOne({ _id: req.params.id })
@@ -164,4 +164,4 @@ exports.updateLikePost = (req, res) => {
             }
         })
         .catch(error => res.status(400).json({ error }));
-};
+}

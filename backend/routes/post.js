@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { body } = require('express-validator');
+const { body } = require("express-validator");
 const auth = require("../middlewares/auth");
 const multer = require("../middlewares/multer-config");
 
@@ -15,7 +15,7 @@ const parse = (req, res, next) => {
     delete req._userId;
     if (req.file) {
         req.body = JSON.parse(req.body.post);
-        req.imageUrl = getImageUrl(req)
+        req.imageUrl = getImageUrl(req);
     }
     next();
 }
