@@ -1,6 +1,6 @@
 <script>
 import { RouterLink } from "vue-router";
-import { getToken, getUserId } from "../utils/auth";
+import { getToken, getUserId, getUserRole } from "../utils/auth";
 
 export default {
     components: {
@@ -32,7 +32,7 @@ export default {
                 }
             });
             this.post = await res.json();
-            this.userCreated = this.post.userId === getUserId();
+            this.userCreated = this.post.userId === getUserId() || getUserRole() === "admin";
         },
         async likePost(like) {
             await fetch(`http://localhost:3000/api/posts/${this.postId}/like`, {

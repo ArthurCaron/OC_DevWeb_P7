@@ -12,6 +12,7 @@ const login = async (email, password) => {
     });
     const jwt = await res.json();
     sessionStorage.setItem("userId", JSON.stringify(jwt.userId));
+    sessionStorage.setItem("userRole", JSON.stringify(jwt.role));
     sessionStorage.setItem("token", JSON.stringify(jwt.token));
 }
 
@@ -31,4 +32,6 @@ const getToken = () => JSON.parse(sessionStorage.getItem("token"))
 
 const getUserId = () => JSON.parse(sessionStorage.getItem("userId"))
 
-export { login, logout, isLoggedIn, getToken, getUserId }
+const getUserRole = () => JSON.parse(sessionStorage.getItem("userRole"))
+
+export { login, logout, isLoggedIn, getToken, getUserId, getUserRole }
