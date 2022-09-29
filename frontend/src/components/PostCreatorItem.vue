@@ -1,8 +1,11 @@
 <script>
+import { getToken } from "../utils/auth";
+
 export default {
     data() {
         return {
-            text: ""
+            text: "",
+            image: null
         }
     },
     methods: {
@@ -14,9 +17,10 @@ export default {
                 await fetch(`http://localhost:3000/api/posts`, {
                     method: "POST",
                     headers: { 
-                        'Accept': 'application/json', 
-                        'Content-Type': 'application/json' 
-                        },
+                        "Accept": "application/json", 
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${getToken()}`
+                    },
                     body: JSON.stringify({ "text": this.text })
                 })
             } else {
@@ -26,14 +30,23 @@ export default {
 
                 await fetch(`http://localhost:3000/api/posts`, {
                     method: "POST",
+                    headers: {
+                        "Authorization": `Bearer ${getToken()}`
+                    },
                     body: formData
                 })
             }
-            this.$emit("postCreated")
+            this.clear();
+            this.$emit("postCreated");
         },
         imageSelected(e) {
             const file = e.target.files[0];
             this.image = file;
+        },
+        clear() {
+            this.text = "";
+            this.image = null;
+            this.$refs.image.reset();
         }
     }
 }
@@ -42,7 +55,9 @@ export default {
 <template>
     <div class="creator">
         <span>Add an image:</span>
-        <input type="file" accept="image/png, image/jpeg, image/jpg" @change="imageSelected" />
+        <form ref="image">
+            <input type="file" accept="image/png, image/jpeg, image/jpg" @change="imageSelected" />
+        </form>
         <textarea v-model="text" rows="10"></textarea>
         <span @click="createPost">Post</span>
     </div>

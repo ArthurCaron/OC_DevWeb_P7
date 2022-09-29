@@ -1,6 +1,7 @@
 <script>
 import PostItem from "../components/PostItem.vue";
 import PostCreatorItem from "../components/PostCreatorItem.vue";
+import { getToken } from "../utils/auth";
 
 export default {
     components: {
@@ -14,7 +15,11 @@ export default {
     },
     methods: {
         async fetchAll() {
-            const res = await fetch("http://localhost:3000/api/posts");
+            const res = await fetch("http://localhost:3000/api/posts", {
+                headers: {
+                    "Authorization": `Bearer ${getToken()}`
+                }
+            });
             this.posts = await res.json();
         }
     },

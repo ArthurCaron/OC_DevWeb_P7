@@ -1,4 +1,6 @@
 <script>
+import { getToken } from "../utils/auth";
+
 export default {
     data() {
         return {
@@ -17,7 +19,11 @@ export default {
     },
     methods: {
         async fetchData() {
-            const res = await fetch(`http://localhost:3000/api/posts/${this.$route.params.id}`)
+            const res = await fetch(`http://localhost:3000/api/posts/${this.$route.params.id}`, {
+                headers: {
+                    "Authorization": `Bearer ${getToken()}`
+                }
+            })
             this.post = await res.json()
         },
         redirectToHome() {
@@ -28,9 +34,10 @@ export default {
                 await fetch(`http://localhost:3000/api/posts/${this.$route.params.id}`, {
                     method: "PUT",
                     headers: { 
-                        'Accept': 'application/json', 
-                        'Content-Type': 'application/json' 
-                        },
+                        "Accept": "application/json", 
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${getToken()}`
+                    },
                     body: JSON.stringify({ "text": this.post.text })
                 })
             } else {
@@ -40,6 +47,9 @@ export default {
 
                 await fetch(`http://localhost:3000/api/posts/${this.$route.params.id}`, {
                     method: "PUT",
+                    headers: {
+                        "Authorization": `Bearer ${getToken()}`
+                    },
                     body: formData
                 })
             }
@@ -47,7 +57,10 @@ export default {
         },
         async deletePost() {
             await fetch(`http://localhost:3000/api/posts/${this.$route.params.id}`, {
-                method: "DELETE"
+                method: "DELETE",
+                headers: {
+                    "Authorization": `Bearer ${getToken()}`
+                }
             })
             this.redirectToHome()
         },

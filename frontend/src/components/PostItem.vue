@@ -1,5 +1,6 @@
 <script>
 import { RouterLink } from "vue-router";
+import { getToken } from "../utils/auth";
 
 export default {
     components: {
@@ -25,7 +26,11 @@ export default {
     },
     methods: {
         async fetchData() {
-            const res = await fetch(`http://localhost:3000/api/posts/${this.postId}`);
+            const res = await fetch(`http://localhost:3000/api/posts/${this.postId}`, {
+                headers: {
+                    "Authorization": `Bearer ${getToken()}`
+                }
+            });
             this.post = await res.json();
             this.userCreated = this.post.userId === "1"; // need to check against current user id
         },
@@ -33,9 +38,10 @@ export default {
             await fetch(`http://localhost:3000/api/posts/${this.postId}/like`, {
                 method: "POST",
                 headers: { 
-                    'Accept': 'application/json', 
-                    'Content-Type': 'application/json' 
-                    },
+                    "Accept": "application/json", 
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${getToken()}`
+                },
                 body: JSON.stringify({ "like": like })
             })
             this.fetchData();
