@@ -13,17 +13,49 @@ export default {
 </script>
 
 <template>
-    <div>
-        <span>Email:</span>
-        <input type="text" ref="email" />
-        <span>Password:</span>
-        <input type="password" ref="password" />
-        <div id="login" @click="login">Login</div>
+    <div class="wrapper">
+        <div>
+            <div>
+                <span>Email: </span>
+                <input type="text" ref="email" />
+            </div>
+            <div>
+                <span>Password: </span>
+                <input type="password" ref="password" />
+            </div>
+            <div class="loginWrapper">
+                <div id="login" @click="login">Login</div>
+            </div>
+        </div>
     </div>
 </template>
 
 <style scoped>
+.wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper > div > div {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 8px;
+}
+
+.wrapper > div > .loginWrapper {
+    display: flex;
+    justify-content: center;
+}
+
 #login {
+    display: flex;
+    justify-content: center;
     cursor: pointer;
+    border: 1px solid black;
+    background-color: #FD2D01;
+    color: white;
+    width: 60px;
+    padding: 8px;
 }
 </style>

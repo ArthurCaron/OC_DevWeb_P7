@@ -17,6 +17,14 @@ export default {
             this.$emit("loggedOut");
             this.$router.push({ name: 'Login' });
         }
+    },
+    computed: {
+        isLoginPage() {
+            return this.$route.name === "Login";
+        },
+        isSignUpPage() {
+            return this.$route.name === "SignUp";
+        }
     }
 }
 </script>
@@ -31,24 +39,51 @@ export default {
         </nav>
         <nav v-else>
             <IconLogoMonoBlackVue />
-            <RouterLink :to="{ name: 'Login' }">
-                Login
-            </RouterLink>
-            <RouterLink :to="{ name: 'SignUp' }">
-                Sign up
-            </RouterLink>
+            <div>
+                <RouterLink :class="{ selected: isLoginPage }" :to="{ name: 'Login' }">
+                    Login
+                </RouterLink>
+                <RouterLink :class="{ selected: isSignUpPage }" :to="{ name: 'SignUp' }">
+                    Sign up
+                </RouterLink>
+            </div>
         </nav>
     </header>
 </template>
 
 <style scoped>
 nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
     width: 100%;
+}
+
+nav > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+nav > div > a {
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    padding: 10px;
+}
+
+.selected {
+    background-color:  #FFD7D7;
 }
 
 a {
     display: block;
     height: 100%;
+    text-decoration: none;
+    color: black;
 }
 
 #logout {
