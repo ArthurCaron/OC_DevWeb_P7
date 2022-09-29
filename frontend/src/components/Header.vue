@@ -87,7 +87,12 @@ a {
 }
 
 #logout {
+    display: flex;
+    justify-content: center;
+    width: 80px;
     cursor: pointer;
+    border: 1px solid black;
+    background-color:  #FFD7D7;
 }
 </style>
     
