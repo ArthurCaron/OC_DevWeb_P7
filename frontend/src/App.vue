@@ -24,11 +24,7 @@ export default {
 <template>
     <div class="wrapper">
         <Header :isLoggedIn="isLoggedIn" @loggedOut="logUpdate"></Header>
-        <div>
-            <div>
-                <RouterView @loggedIn="logUpdate" />
-            </div>
-        </div>
+        <RouterView @loggedIn="logUpdate" />
     </div>
 </template>
 
@@ -40,12 +36,4 @@ export default {
     width: 720px;
 }
 
-.wrapper > div {
-    border: 1px solid black;
-    background-color: #FFD7D7;
-}
-
-.wrapper > div > div {
-    margin: 20px;
-}
 </style>

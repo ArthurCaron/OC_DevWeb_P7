@@ -14,7 +14,7 @@ export default {
 
 <template>
     <div class="wrapper">
-        <div>
+        <div class="subWrapper">
             <div>
                 <span>Email: </span>
                 <input type="text" ref="email" />
@@ -32,18 +32,25 @@ export default {
 
 <style scoped>
 .wrapper {
-    display: flex;
-    flex-direction: column;
+    border: 1px solid black;
+    background-color: #FFD7D7;
+    width: 100%;
 }
 
-.wrapper > div > div {
+.subWrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.subWrapper > div {
     display: flex;
     justify-content: space-between;
     width: 100%;
     margin: 8px;
 }
 
-.wrapper > div > .loginWrapper {
+.subWrapper > .loginWrapper {
     display: flex;
     justify-content: center;
 }
