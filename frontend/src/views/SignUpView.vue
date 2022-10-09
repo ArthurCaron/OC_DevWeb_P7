@@ -1,5 +1,5 @@
 <script>
-import { login } from "../utils/auth";
+import { login, setTokenInfo } from "../utils/auth";
 
 export default {
     methods: {
@@ -16,8 +16,7 @@ export default {
                 })
             });
             const jwt = await res.json();
-            sessionStorage.setItem("userId", JSON.stringify(jwt.userId));
-            sessionStorage.setItem("token", JSON.stringify(jwt.token));
+            setTokenInfo(jwt);
 
             await login(this.$refs.email.value, this.$refs.password.value);
             this.$emit("loggedIn");

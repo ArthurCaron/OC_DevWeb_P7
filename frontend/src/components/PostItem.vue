@@ -32,6 +32,7 @@ export default {
                 }
             });
             this.post = await res.json();
+            console.log(getUserRole());
             this.userCreated = this.post.userId === getUserId() || getUserRole() === "admin";
         },
         async likePost(like) {
